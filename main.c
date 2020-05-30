@@ -51,27 +51,42 @@ int main(void)
     while (var != QUIT)     //Mientras no se presiones q
     {
         var= input();       //Consigo el valor del input
-                
-        if ((var>=0) && (var<=7))
+            
+        switch (var)
         {
-            bitToggle(var, puerto);             //Cambio el estado de un bit al contrario
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            {
+                bitToggle(var, puerto);             //Cambio el estado de un bit al contrario
+            }; break;
+            case 's':
+            case 'S':
+            {
+                maskOn(mask,puerto);                // prendo todos los bits 
+            }; break;
+            case 'c':
+            case 'C':
+            {
+                maskOff(mask,puerto);               // apago todos los bits
+            };break;
+            case 't':
+            case 'T':
+            {
+                maskToggle (mask,puerto);           // prende los bits apagados y apaga los prendidos
+            }; break;
+            case 'q':
+            case 'Q':
+            {
+                printf("salgo del programa\n");
+            }
         }
-        else if((var=='s')||(var=='S'))         //Si se presiono s
-        {
-            maskOn(mask,puerto);                // prendo todos los bits 
-        }
-        else if ((var=='c')||(var=='C'))        //Si se presiono c
-        {
-            maskOff(mask,puerto);               // apago todos kos bit
-        }
-        else if ((var=='t')||(var=='T'))        //Si se presiono t
-        {
-            maskToggle (mask,puerto);           // prende los bits apagados y apaga los prendidos
-        }
-        else if ((var == 'i')||(var == 'I'))    //Si se presiono i
-        {
-            printInstructions();                // imprimo nuevamente las instrucciones
-        }
+       
         
         printPort(puerto);                      //Imprimo el puerto
         
@@ -80,7 +95,7 @@ int main(void)
     
     
     
-    al_destroy_display(display); // Destruyo recursos empleados
+    al_destroy_display(display); // Destruyo recurso empleados
     
     return 0;
 }
