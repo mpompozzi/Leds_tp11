@@ -23,13 +23,15 @@ int main(void)
 {
     ALLEGRO_DISPLAY * display = NULL;
 
-    if (!al_init()) { //Primera funcion a llamar antes de empezar a usar allegro.
+    if (!al_init())     //Primera funcion a llamar antes de empezar a usar allegro.
+    { 
         fprintf(stderr, "failed to initialize allegro!\n");
         return -1;
     }
 
-    display = al_create_display(1100, 250); // Intenta crear display de 640x480 de fallar devuelve NULL
-    if (!display) {
+    display = al_create_display(ANCHO, ALTO); // Intenta crear display, si falla devuelve NULL
+    if (!display) 
+    {
         fprintf(stderr, "failed to create display!\n");
         return -1;
     }
@@ -76,7 +78,9 @@ int main(void)
     }
     printf("Termino el programa\n");            //Se presiono q y termina el programa
     
-    al_destroy_display(display); //IMPORTANTE: Destruir recursor empleados
+    
+    
+    al_destroy_display(display); // Destruyo recursos empleados
     
     return 0;
 }

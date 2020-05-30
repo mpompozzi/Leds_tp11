@@ -20,5 +20,8 @@
 #define MASK16 0X0001
 #define QUIT -2
 
+#define ALTO 250
+#define ANCHO 1100
+
 #endif /* CONST_H */
 
