@@ -19,8 +19,21 @@
 /*
  * 
  */
-int main(int argc, char** argv) 
+int main(void) 
 {
+    ALLEGRO_DISPLAY * display = NULL;
+
+    if (!al_init()) { //Primera funcion a llamar antes de empezar a usar allegro.
+        fprintf(stderr, "failed to initialize allegro!\n");
+        return -1;
+    }
+
+    display = al_create_display(640, 480); // Intenta crear display de 640x480 de fallar devuelve NULL
+    if (!display) {
+        fprintf(stderr, "failed to create display!\n");
+        return -1;
+    }
+    
     char puerto='a';    //Inicializo en el puerto A
     int mask= 0xFF;     //Inicializo la mascara en 11111111b
     int var= -3;        //Inicializo la variable con un valor que no interfiera con las funciones
