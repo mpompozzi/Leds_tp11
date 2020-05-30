@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include "PortControl.h"
 #include "const.h"
-
+#include <allegro5/allegro.h>
 /*
  * 
  */
@@ -28,7 +28,7 @@ int main(void)
         return -1;
     }
 
-    display = al_create_display(640, 480); // Intenta crear display de 640x480 de fallar devuelve NULL
+    display = al_create_display(1100, 250); // Intenta crear display de 640x480 de fallar devuelve NULL
     if (!display) {
         fprintf(stderr, "failed to create display!\n");
         return -1;
@@ -75,6 +75,8 @@ int main(void)
         
     }
     printf("Termino el programa\n");            //Se presiono q y termina el programa
+    
+    al_destroy_display(display); //IMPORTANTE: Destruir recursor empleados
     
     return 0;
 }
