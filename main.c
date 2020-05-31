@@ -40,6 +40,11 @@ int main(void)
         return -1;
     }
     
+    al_clear_to_color(al_map_rgb(255, 255, 255)); //Hace clear del backbuffer del diplay al color RGB 255,255,255 (blanco)
+
+    al_flip_display(); //Flip del backbuffer, pasa a verse a la pantalla
+    
+    
     char puerto='a';    //Inicializo en el puerto A
     int mask= 0xFF;     //Inicializo la mascara en 11111111b
     int var= -3;        //Inicializo la variable con un valor que no interfiera con las funciones
