@@ -26,6 +26,10 @@ int input (void);
 int main(void) 
 {
     ALLEGRO_DISPLAY * display = NULL;
+    //ALLEGRO_EVENT_QUEUE *event_queue = NULL;
+    //ALLEGRO_TIMER *timer = NULL;
+    //ALLEGRO_BITMAP *led = NULL;
+    
 
     if (!al_init())     //Primera funcion a llamar antes de empezar a usar allegro.
     { 
@@ -101,7 +105,8 @@ int main(void)
     printf("Termino el programa\n");            //Se presiono q y termina el programa
     
     
-    
+   // al_destroy_bitmap(cuadradito);
+   //al_destroy_timer(timer);
     al_destroy_display(display); // Destruyo recurso empleados
     
     return 0;
