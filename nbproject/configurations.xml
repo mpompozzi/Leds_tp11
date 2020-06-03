@@ -27,6 +27,8 @@
                    projectFiles="false"
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
+      <itemPath>../../../Downloads/OFF.jpeg</itemPath>
+      <itemPath>../../../Downloads/ON.jpeg</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>

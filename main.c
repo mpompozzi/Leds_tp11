@@ -50,6 +50,9 @@ int main(void)
 
     al_flip_display(); //Flip del backbuffer, pasa a verse a la pantalla
     
+    al_init_image_addon();
+    
+    ALLEGRO_BITMAP *ledOn = al_load_bitmap("");
     
     char puerto='a';    //Inicializo en el puerto A
     int mask= 0xFF;     //Inicializo la mascara en 11111111b
@@ -107,7 +110,7 @@ int main(void)
     printf("Termino el programa\n");            //Se presiono q y termina el programa
     
     
-   // al_destroy_bitmap(cuadradito);
+   al_destroy_bitmap(ledOn);
    //al_destroy_timer(timer);
     al_destroy_display(display); // Destruyo recurso empleados
     
