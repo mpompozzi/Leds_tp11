@@ -28,6 +28,7 @@ int input (void);
 int main(void) 
 {
     ALLEGRO_DISPLAY * display = NULL;
+     ALLEGRO_BITMAP *ledOn;
     //ALLEGRO_EVENT_QUEUE *event_queue = NULL;
     //ALLEGRO_TIMER *timer = NULL;
     //ALLEGRO_BITMAP *led = NULL;
@@ -52,7 +53,12 @@ int main(void)
     
     al_init_image_addon();
     
-    ALLEGRO_BITMAP *ledOn = al_load_bitmap("");
+    ledOn = al_load_bitmap("ON.jpeg");
+    
+    if (!ledOn) {
+        fprintf(stderr, "failed to load image !\n");
+        return 0;
+    }
     
     char puerto='a';    //Inicializo en el puerto A
     int mask= 0xFF;     //Inicializo la mascara en 11111111b
