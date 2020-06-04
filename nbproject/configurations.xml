@@ -28,8 +28,6 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
-    <itemPath>../../../Downloads/OFF.jpeg</itemPath>
-    <itemPath>../../../Downloads/ON.jpeg</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -61,10 +59,6 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="../../../Downloads/OFF.jpeg" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="../../../Downloads/ON.jpeg" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="PortControl.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="PortControl.h" ex="false" tool="3" flavor2="0">
@@ -95,10 +89,6 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="../../../Downloads/OFF.jpeg" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="../../../Downloads/ON.jpeg" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="PortControl.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="PortControl.h" ex="false" tool="3" flavor2="0">

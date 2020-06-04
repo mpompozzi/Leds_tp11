@@ -52,10 +52,16 @@ int main(void)
     al_flip_display(); //Flip del backbuffer, pasa a verse a la pantalla
     
     al_init_image_addon();
+    if (!al_init_image_addon())
+    {
+        fprintf(stderr, "failed to initialize image addon!\n");
+        return -1;
+    }
+         
+    ledOn = al_load_bitmap("led_on.jpg");
     
-    ledOn = al_load_bitmap("led_on.png");
-    
-    if (!ledOn) {
+    if (!ledOn) 
+    {
         fprintf(stderr, "failed to load image !\n");
         return 0;
     }
@@ -65,7 +71,7 @@ int main(void)
     int var= -3;        //Inicializo la variable con un valor que no interfiera con las funciones
     
     
-    maskOff(mask, puerto);  //Apago todos los bit del puerto 
+    maskOff(mask, puerto);  //Apago todos losd  bit del puerto 
    
     printPort(puerto);      //Imprimo el puerto
     
