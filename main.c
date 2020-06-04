@@ -53,7 +53,7 @@ int main(void)
     
     al_init_image_addon();
     
-    ledOn = al_load_bitmap("ON.jpeg");
+    ledOn = al_load_bitmap("led_on.png");
     
     if (!ledOn) {
         fprintf(stderr, "failed to load image !\n");
