@@ -5,6 +5,9 @@
  *
  * Created on May 27, 2020, 1:11 PM
  */
+/*******************************************************************************
+ * HEADERS Y LIBRERIAS
+ ******************************************************************************/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,11 +17,24 @@
 #include <allegro5/allegro_image.h>
 #include <stdbool.h>
 
-
+/*******************************************************************************
+ * PROTOTIPOS
+ ******************************************************************************/
 void printPort(char puerto);
 int input(void);
 
-int main(void) {
+/*******************************************************************************
+ * VARIABLES GLOBALES
+ ******************************************************************************/
+int leds_pos[8];
+bool led_actual[8];
+bool led_anterior[8];
+/*******************************************************************************
+ * FUNCION MAIN
+ ******************************************************************************/
+int main(void) 
+{
+/*VARIABLES */
     ALLEGRO_DISPLAY * display = NULL;
     ALLEGRO_BITMAP *ledOn;
     //ALLEGRO_BITMAP *background = NULL;
@@ -26,7 +42,7 @@ int main(void) {
     ALLEGRO_TIMER *timer = NULL;
     //ALLEGRO_BITMAP *led = NULL;
 
-
+/*INICIALIZACIONES DE ALLEGRO*/
     if (!al_init()) //Primera funcion a llamar antes de empezar a usar allegro.
     {
         fprintf(stderr, "failed to initialize allegro!\n");
@@ -196,8 +212,8 @@ int main(void) {
         
 
         return 0;
-    }
 }
+
 
 int input(void) {
     int c = 0;
