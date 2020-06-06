@@ -128,7 +128,7 @@ int main(void) {
                 case ALLEGRO_KEY_B:
                 {
                     int c = 0;
-                    for (c = 0; c <= 8; ++c) {
+                    for (c = 0; c <= 7; ++c) {
                         led_anterior[c] = led_actual[c];
                     }
                     while (ev.type == ALLEGRO_EVENT_KEY_DOWN && ev.keyboard.keycode == ALLEGRO_KEY_B) {
@@ -143,11 +143,11 @@ int main(void) {
                         maskOff(mask, puerto);
                         print_led();
                         
-                        al_rest(0.1);   //Espera 5 
+                        al_rest(0.5);   //Espera 5 
                         
                         for (c = 0; c <= 7; ++c) 
                         {
-                            led_anterior[c] = led_actual[c];
+                            led_actual[c] = led_anterior[c];
                             if (led_anterior[c]) 
                             {
                                 bitSet(c, 'A');
