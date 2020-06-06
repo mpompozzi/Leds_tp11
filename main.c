@@ -102,18 +102,22 @@ int main(void)
     //al_draw_bitmap(ledOn, 10, 100, 0); //flags(normalmente en cero, ver doc. para rotar etc)
 
 /*INICIALIZACION DE PUERTO A*/
+   
     char puerto = 'a'; //Inicializo en el puerto A
     int mask = 0xFF; //Inicializo la mascara en 11111111b
     int var = -3; //Inicializo la variable con un valor que no interfiera con las funciones
     
-    maskOff(mask, puerto); //Apago todos losd  bit del puerto 
+   
+    maskOff(mask, puerto); //Apago todos los  bit del puerto 
     //printPort(puerto); //Imprimo el puerto
     print_led();
     
     al_register_event_source(event_queue, al_get_keyboard_event_source());
     al_register_event_source(event_queue, al_get_timer_event_source(timer));
     al_start_timer(timer); //Recien aca EMPIEZA el timer
+    
     bool out=0;
+    
     while (!out) 
     {
         ALLEGRO_EVENT ev;
