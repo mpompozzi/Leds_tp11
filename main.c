@@ -23,12 +23,13 @@
 void printPort(char puerto);
 int input(void);
 void init_leds(ALLEGRO_BITMAP *led);
+void print_led(void);
 /*******************************************************************************
  * VARIABLES GLOBALES
  ******************************************************************************/
 int leds_pos[8]={0,DIST,2*DIST,3*DIST,4*DIST,5*DIST,6*DIST,7*DIST};
-/*bool led_actual[8];
-bool led_anterior[8];*/
+bool led_actual[8];
+bool led_anterior[8];
 /*******************************************************************************
  * FUNCION MAIN
  ******************************************************************************/
@@ -74,11 +75,13 @@ int main(void)
         fprintf(stderr, "failed to load image !\n");
         return -1;
     }
+    ledOn = al_load_bitmap("led_on.jpeg");
     ledOff = al_load_bitmap("led_off.jpeg");
-    if (!ledOn) {
+    if (!ledOff) {
         fprintf(stderr, "failed to load image !\n");
         return -1;
     }
+
 /*CREACIÓN  EL DISPLAY PRINCIPAL*/
     display = al_create_display(ANCHO, ALTO); // Intenta crear display, si falla devuelve NULL
     if (!display) {
@@ -122,10 +125,14 @@ int main(void)
                     break;
 
                 case ALLEGRO_KEY_S:
-                    ;
+                    bitSet(3,'A');
+                    //al_draw_bitmap(ledOn,leds_pos[3], 100, 0);
+                    //al_flip_display();
+                    print_led();
                     break;
 
                 case ALLEGRO_KEY_T:
+                    
                     ;
                     break;
                 case ALLEGRO_KEY_0:
@@ -299,6 +306,29 @@ void init_leds(ALLEGRO_BITMAP *led)
     for(i=0;i<=8;++i)
     {
         al_draw_bitmap(led,leds_pos[i], 100, 0);
+    }
+    al_flip_display();
+}
+
+void print_led(void)
+{
+    ALLEGRO_BITMAP *ledOn = al_load_bitmap("led_on.jpeg");
+    ALLEGRO_BITMAP *ledOff = al_load_bitmap("led_off.jpeg");
+    int c;
+    for(c=0;c<=8;++c)
+    {
+        led_actual[c]=(bool)bitGet(c,'A');
+    }
+    for(c=0;c<=8;++c)
+    {
+        if(led_actual[c]==true)
+        {
+            al_draw_bitmap(ledOn,leds_pos[c], 100, 0);
+        }
+        else
+        {
+            al_draw_bitmap(ledOff,leds_pos[c], 100, 0);
+        }
     }
     al_flip_display();
 }
