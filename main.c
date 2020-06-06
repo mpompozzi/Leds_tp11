@@ -156,14 +156,11 @@ int main(void) {
                         
                         print_led();
                         
-                        al_rest(0.1);
+                        al_rest(0.5);
                         
                         al_get_next_event(event_queue, &ev);
                     }
-
-                    
                 }
-                    //al_rest(5.0);
                     break;
                 case ALLEGRO_KEY_S:
                     maskOn(mask, 'A');
