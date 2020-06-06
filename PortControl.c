@@ -75,7 +75,7 @@ void bitSet (int bit,char puerto)
     }
     else
     {
-        printf("Datos mal ingresados\n");
+        printf("Datos mal ingresados 1\n");
     }
 }
 
@@ -108,7 +108,7 @@ void bitClr (int bit, char puerto)
     }
     else
     {
-        printf("Datos mal ingresados\n");
+        printf("Datos mal ingresados 2\n");
     }
 }
 
@@ -164,7 +164,7 @@ int bitGet (int bit, char puerto)
     }
     else
     {
-        printf("Datos mal ingresados\n");
+        printf("Datos mal ingresados 3\n");
     }
     return estado;
 }
@@ -198,7 +198,7 @@ void bitToggle (int bit, char puerto)
     }
     else
     {
-        printf("Datos mal ingresados\n");
+        printf("Datos mal ingresados 4\n");
     }
 }
 
@@ -225,7 +225,7 @@ void maskOn (int mask, char puerto)
     }
     else 
     {
-        printf("Datos mal ingresados\n");
+        printf("Datos mal ingresados 5\n");
     } 
 }
 
@@ -251,7 +251,7 @@ void maskOff (int mask, char puerto)
     }
     else 
     {
-        printf("Datos mal ingresados\n");
+        printf("Datos mal ingresados 6\n");
     } 
 }
 
@@ -277,6 +277,6 @@ void maskToggle (int mask, char puerto)
     }
     else 
     {
-        printf("Datos mal ingresados\n");
+        printf("Datos mal ingresados 7\n");
     } 
 }
