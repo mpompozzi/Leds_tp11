@@ -42,7 +42,7 @@ int main(void)
     //ALLEGRO_BITMAP *background = NULL;
     ALLEGRO_EVENT_QUEUE *event_queue = NULL;
     ALLEGRO_TIMER *timer = NULL;
-    //ALLEGRO_BITMAP *led = NULL;
+   
 
 /******************** INICIALIZACIONES DE ALLEGRO  ****************************/
     if (!al_init()) //Primera funcion a llamar antes de empezar a usar allegro.
@@ -119,26 +119,21 @@ int main(void)
                 case ALLEGRO_KEY_B:
                     ;
                     break;
-
-                case ALLEGRO_KEY_C:
-                    ;
-                    break;
-
                 case ALLEGRO_KEY_S:
-                    bitSet(3,'A');
-                    //al_draw_bitmap(ledOn,leds_pos[3], 100, 0);
-                    //al_flip_display();
+                    maskOn(mask,'A');
                     print_led();
                     break;
-
+                case ALLEGRO_KEY_C:
+                    maskOff(mask,'A');
+                    print_led();
+                    break;
                 case ALLEGRO_KEY_T:
-                    
-                    ;
+                    maskToggle(mask,'A');
+                    print_led();
                     break;
                 case ALLEGRO_KEY_0:
                     bitToggle(0,'A');
                     print_led();
-                   
                     break;
                 case ALLEGRO_KEY_1:
                     bitToggle(1,'A');
@@ -148,14 +143,15 @@ int main(void)
                     bitToggle(2,'A');
                     print_led();
                     break;
-                case ALLEGRO_KEY_3:q
+                case ALLEGRO_KEY_3:
                     bitToggle(3,'A');
                     print_led();
                     break;
                 case ALLEGRO_KEY_4:
                     bitToggle(4,'A');
                     print_led();
-                    break;qq
+                    break;
+                case ALLEGRO_KEY_5:    
                     bitToggle(5,'A');
                     print_led();
                     break;
@@ -171,56 +167,9 @@ int main(void)
                 case ALLEGRO_KEY_Q:
                     out = 1;
                     break;
-
-
-
             }
         }
     }
-   /* while (var != QUIT) //Mientras no se presiones q
-    {
-        var = input(); //Consigo el valor del input
-
-        switch (var) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            {
-                bitToggle(var, puerto); //Cambio el estado de un bit al contrario
-            };
-                break;
-            case 's':
-            case 'S':
-            {
-                maskOn(mask, puerto); // prendo todos los bits 
-            };
-                break;
-            case 'c':
-            case 'C':
-            {
-                maskOff(mask, puerto); // apago todos los bits
-            };
-                break;
-            case 't':
-            case 'T':
-            {
-                maskToggle(mask, puerto); // prende los bits apagados y apaga los prendidos
-            };
-                break;
-            case 'q':
-            case 'Q':
-            {
-                printf("salgo del programa\n");
-            }
-        }
-       // printPort(puerto); //Imprimo el puerto
-    }
- */
 /*FINALIZACION DEL PROGRAMA*/
     printf("Termino el programa\n"); //Se presiono q y termina el programa.
     al_destroy_bitmap(ledOn);
@@ -232,69 +181,6 @@ int main(void)
 /*******************************************************************************
  *FUNCIONES LOCALES
  ******************************************************************************/
-int input(void) {
-    int c = 0;
-    int conta = 0;
-    int out = 0; //Flag para q
-    int res = 0; //Para devolver la respuesta
-
-
-    while ((c = getchar()) != '\n') {
-        if ((c >= '0') && (c <= '7')) //Si es uno de los numeros de los bites del puerto
-        {
-            res *= 10;
-            res = (c - '0'); // lo almaceno en res pasandolo a int y aumento el contador  
-            conta++;
-        }//Si es una de las letras para los comandos
-        else if (c == 't' || c == 'T' || c == 'c' || c == 'C' || c == 's' || c == 'S' || c == 'i' || c == 'I') {
-            conta++; //Aumento el contador
-            res = c; //La almaceno en res
-        } else if ((c == 'Q') || (c == 'q')) //En el caso de ser el comando q
-        {
-            out = 1; //Enciendo el flag de q
-            conta++; //Aumento El contador 
-        } else {
-            conta = -10; //Si no es ninguno de los casos anteriores el contador general en -10
-        }
-    }
-
-    if (conta <= 0 || conta > 1) //Si el contador es menor a 0 o mayor a 1
-    {
-        res = ERROR; //Devuelvo error
-
-        printf("Lo ingresado no es valido\n"); //y lo imprimo en pantalla
-    }
-
-    if (out == 1 && conta == 1) //Si se presiono q y el contador es 1
-    {
-        res = QUIT; //Devuelvo QUIT para salir del programa
-    }
-
-    return res;
-}
-
-/*
-void printPort(char puerto) {
-    int i = 0;
-
-    printf("|");
-
-    for (i = 0; i <= 7; i++) {
-
-        if (bitGet(i, puerto)) //Si bitGet devuelve 1, porque el bit esta prendido
-        {
-            printf("*"); // imprimo un *
-        } else //Caso contrario (si devuelve un 0) 
-        {
-            printf(" "); // imprimo un espacio
-        }
-
-        printf("|");
-    }
-
-    printf("\n");
-}
-*/
 /*void blink_port(void)
 {
    int index=0;
@@ -322,6 +208,7 @@ void print_led(void)
     ALLEGRO_BITMAP *ledOn = al_load_bitmap("led_on.jpeg");
     ALLEGRO_BITMAP *ledOff = al_load_bitmap("led_off.jpeg");
     int c;
+    al_clear_to_color(al_map_rgb(0, 0, 0));
     for(c=0;c<=8;++c)
     {
         led_actual[c]=(bool)bitGet(c,'A');
