@@ -143,7 +143,7 @@ int main(void) {
                         maskOff(mask, puerto);
                         print_led();
                         
-                        al_rest(0.5);   //Espera 5 
+                        al_rest(0.1);   //Espera 5 
                         
                         for (c = 0; c <= 7; ++c) 
                         {
@@ -156,7 +156,7 @@ int main(void) {
                         
                         print_led();
                         
-                        al_rest(0.5);
+                        al_rest(0.1);
                         
                         al_get_next_event(event_queue, &ev);
                     }
@@ -256,4 +256,20 @@ void print_led(void) {
         }
     }
     al_flip_display();
+    
+    int i=0;
+    printf("|");
+    for(i=0; i<=7;i++)
+    {
+        if(led_actual[i])    //Si bitGet devuelve 1, porque el bit esta prendido
+        {
+            printf("*");        // imprimo un *
+        }
+        else                    //Caso contrario (si devuelve un 0) 
+        {
+            printf(" ");        // imprimo un espacio
+        }
+        printf("|");
+    }
+    printf("\n");
 }
