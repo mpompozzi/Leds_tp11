@@ -23,6 +23,7 @@
 void printPort(char puerto);
 int input(void);
 void print_led(void);
+
 /*******************************************************************************
  * VARIABLES GLOBALES
  ******************************************************************************/
@@ -61,7 +62,7 @@ int main(void) {
         return -1;
     }
     /*INICIALIZO EL TIMER*/
-    timer = al_create_timer(5.0 / FPS); //crea el timer pero NO empieza a correr
+    timer = al_create_timer(1.0 / FPS); //crea el timer pero NO empieza a correr
     if (!timer) {
         fprintf(stderr, "failed to create timer!\n");
         return -1;
@@ -125,18 +126,29 @@ int main(void) {
             switch (ev.keyboard.keycode) {
                 case ALLEGRO_KEY_B:
                 {
-                    int c=0;
+                    int c = 0;
                     for (c = 0; c <= 8; ++c) {
-                        led_actual[c] = (bool) bitGet(c, 'A');
                         led_anterior[c] = led_actual[c];
                     }
+                    while (events.type == ALLEGRO_EVENT_KEY_DOWN && events.keyboard.keycode == ALLEGRO_KEY_B) {
+                        al_get_next_event(event_queue, &events);
+                    } //Neutralizamos el eco del input de la letra b
                     print_led();
 
-                    al_start_timer(timer);
+                    while (events.type != ALLEGRO_EVENT_KEY_DOWN || events.keyboard.keycode != ALLEGRO_KEY_B) {
+                        maskOff(mask, puerto);
+                        print_led();
+                        al_rest(0.5);
+                        for (c = 0; c <= 8; ++c) {
+                            led_anterior[c] = led_actual[c];
+                            if (led_anterior[c]) {
+                                bitSet(c, port);
+                            }
+                        }
 
-                    maskOff(mask, puerto); //Apago todos los  bit del puerto 
-
-                    print_led();
+                        print_led();
+                        al_rest(0.5);
+                    }
 
                     al_start_timer(timer);
 
@@ -239,4 +251,3 @@ void print_led(void) {
     }
     al_flip_display();
 }
-
