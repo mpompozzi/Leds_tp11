@@ -22,7 +22,6 @@
  ******************************************************************************/
 void printPort(char puerto);
 int input(void);
-void init_leds(ALLEGRO_BITMAP *led);
 void print_led(void);
 /*******************************************************************************
  * VARIABLES GLOBALES
@@ -59,6 +58,12 @@ int main(void)
     event_queue = al_create_event_queue(); //Allegro usa cola eventos, como las colas del super pero sin comida :( (por orden de llegada)
     if (!event_queue) {
         fprintf(stderr, "failed to create event_queue!\n");
+        return -1;
+    }
+/*INICIALIZO EL TIMER*/    
+    timer = al_create_timer(1.0 / FPS); //crea el timer pero NO empieza a correr
+    if (!timer) {
+        fprintf(stderr, "failed to create timer!\n");
         return -1;
     }
 /*INICIALIZO OPERACIONES CON IMAGENES*/
@@ -103,11 +108,12 @@ int main(void)
     
     maskOff(mask, puerto); //Apago todos losd  bit del puerto 
     //printPort(puerto); //Imprimo el puerto
+    print_led();
     
     al_register_event_source(event_queue, al_get_keyboard_event_source());
-    
+    al_register_event_source(event_queue, al_get_timer_event_source(timer));
+    al_start_timer(timer); //Recien aca EMPIEZA el timer
     bool out=0;
-    init_leds(ledOff);
     while (!out) 
     {
         ALLEGRO_EVENT ev;
@@ -117,7 +123,8 @@ int main(void)
             switch (ev.keyboard.keycode) 
             {
                 case ALLEGRO_KEY_B:
-                    ;
+                    
+                    //al_rest(5.0);
                     break;
                 case ALLEGRO_KEY_S:
                     maskOn(mask,'A');
@@ -192,16 +199,6 @@ int main(void)
    
 }
 */
-
-void init_leds(ALLEGRO_BITMAP *led)
-{
-    int i;
-    for(i=0;i<=8;++i)
-    {
-        al_draw_bitmap(led,leds_pos[i], 100, 0);
-    }
-    al_flip_display();
-}
 
 void print_led(void)
 {
