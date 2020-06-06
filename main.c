@@ -122,6 +122,7 @@ int main(void) {
     while (!out) {
         ALLEGRO_EVENT ev;
         al_wait_for_event(event_queue, &ev);
+        
         if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
             switch (ev.keyboard.keycode) {
                 case ALLEGRO_KEY_B:
@@ -133,22 +134,30 @@ int main(void) {
                     while (ev.type == ALLEGRO_EVENT_KEY_DOWN && ev.keyboard.keycode == ALLEGRO_KEY_B) {
                         al_get_next_event(event_queue, &ev);
                     } //Neutralizamos el eco del input de la letra b
+                    
                     print_led();
 
                     while (ev.type != ALLEGRO_EVENT_KEY_DOWN || ev.keyboard.keycode != ALLEGRO_KEY_B)
                     {
+                        int c=0;
                         maskOff(mask, puerto);
                         print_led();
-                        al_rest(0.5);
-                        for (c = 0; c <= 8; ++c) {
+                        
+                        al_rest(0.5);   //Espera 5 
+                        
+                        for (c = 0; c <= 7; ++c) 
+                        {
                             led_anterior[c] = led_actual[c];
-                            if (led_anterior[c]) {
+                            if (led_anterior[c]) 
+                            {
                                 bitSet(c, 'A');
                             }
                         }
-
+                        
                         print_led();
+                        
                         al_rest(0.5);
+                        
                         al_get_next_event(event_queue, &ev);
                     }
 
@@ -236,10 +245,10 @@ void print_led(void) {
     ALLEGRO_BITMAP *ledOff = al_load_bitmap("led_off.jpeg");
     int c;
     al_clear_to_color(al_map_rgb(255, 255, 255));
-    for (c = 0; c <= 8; ++c) {
+    for (c = 0; c <= 7; ++c) {
         led_actual[c] = (bool) bitGet(c, 'A');
     }
-    for (c = 0; c <= 8; ++c) {
+    for (c = 0; c <= 7; ++c) {
         if (led_actual[c] == true) {
             al_draw_bitmap(ledOn, leds_pos[c], 100, 0);
         } else {
