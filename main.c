@@ -136,29 +136,37 @@ int main(void)
                     ;
                     break;
                 case ALLEGRO_KEY_0:
-                    ;
+                    bitToggle(0,'A');
+                    print_led();
+                   
                     break;
                 case ALLEGRO_KEY_1:
-                    ;
+                    bitToggle(1,'A');
+                    print_led();
                     break;
                 case ALLEGRO_KEY_2:
-                    ;
+                    bitToggle(2,'A');
+                    print_led();
                     break;
                 case ALLEGRO_KEY_3:
-                    ;
+                    bitToggle(3,'A');
+                    print_led();
                     break;
                 case ALLEGRO_KEY_4:
-                    ;
+                    bitToggle(4,'A');
+                    print_led();
                     break;
                 case ALLEGRO_KEY_5:
-                    ;
+                    bitToggle(5,'A');
+                    print_led();
                     break;
                 case ALLEGRO_KEY_6:
-                    ;
+                    bitToggle(6,'A');
+                    print_led();
                     break;
                 case ALLEGRO_KEY_7:
-                    ;
-            
+                    bitToggle(7,'A');
+                    print_led();
                     break;
                 case ALLEGRO_KEY_ESCAPE:
                 case ALLEGRO_KEY_Q:
