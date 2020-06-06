@@ -130,19 +130,19 @@ int main(void) {
                     for (c = 0; c <= 8; ++c) {
                         led_anterior[c] = led_actual[c];
                     }
-                    while (events.type == ALLEGRO_EVENT_KEY_DOWN && events.keyboard.keycode == ALLEGRO_KEY_B) {
-                        al_get_next_event(event_queue, &events);
+                    while (ev.type == ALLEGRO_EVENT_KEY_DOWN && ev.keyboard.keycode == ALLEGRO_KEY_B) {
+                        al_get_next_event(event_queue, &ev);
                     } //Neutralizamos el eco del input de la letra b
                     print_led();
 
-                    while (events.type != ALLEGRO_EVENT_KEY_DOWN || events.keyboard.keycode != ALLEGRO_KEY_B) {
+                    while (ev.type != ALLEGRO_EVENT_KEY_DOWN || ev.keyboard.keycode != ALLEGRO_KEY_B) {
                         maskOff(mask, puerto);
                         print_led();
                         al_rest(0.5);
                         for (c = 0; c <= 8; ++c) {
                             led_anterior[c] = led_actual[c];
                             if (led_anterior[c]) {
-                                bitSet(c, port);
+                                bitSet(c, 'A');
                             }
                         }
 
