@@ -148,15 +148,14 @@ int main(void)
                     bitToggle(2,'A');
                     print_led();
                     break;
-                case ALLEGRO_KEY_3:
+                case ALLEGRO_KEY_3:q
                     bitToggle(3,'A');
                     print_led();
                     break;
                 case ALLEGRO_KEY_4:
                     bitToggle(4,'A');
                     print_led();
-                    break;
-                case ALLEGRO_KEY_5:
+                    break;qq
                     bitToggle(5,'A');
                     print_led();
                     break;
