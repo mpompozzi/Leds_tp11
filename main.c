@@ -135,7 +135,8 @@ int main(void) {
                     } //Neutralizamos el eco del input de la letra b
                     print_led();
 
-                    while (ev.type != ALLEGRO_EVENT_KEY_DOWN || ev.keyboard.keycode != ALLEGRO_KEY_B) {
+                    while (ev.type != ALLEGRO_EVENT_KEY_DOWN || ev.keyboard.keycode != ALLEGRO_KEY_B)
+                    {
                         maskOff(mask, puerto);
                         print_led();
                         al_rest(0.5);
@@ -148,14 +149,10 @@ int main(void) {
 
                         print_led();
                         al_rest(0.5);
+                        al_get_next_event(event_queue, &ev);
                     }
 
-                    al_start_timer(timer);
-
-                    for (c = 0; c <= 8; ++c) {
-                        led_actual[c] = led_anterior[c];
-                    }
-                    print_led();
+                    
                 }
                     //al_rest(5.0);
                     break;
