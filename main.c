@@ -17,6 +17,7 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include <stdbool.h>
+#include <time.h>
 
 /*******************************************************************************
  * PROTOTIPOS
@@ -141,8 +142,9 @@ int main(void) {
                         maskOff(mask, puerto);
                         print_led();
                         
-                        al_rest(0.5);   //Espera 5 
-                        
+                        al_res(0.1);   //Espera 5 
+                        al_get_next_event(event_queue, &ev);
+
                         for (c = 0; c <= 7; ++c) 
                         {
                             led_actual[c] = led_anterior[c];
@@ -154,7 +156,7 @@ int main(void) {
                         
                         print_led();
                         
-                        al_rest(0.5);
+                        al_res(0.1);
                         
                         al_get_next_event(event_queue, &ev);
                     }
@@ -222,17 +224,6 @@ int main(void) {
  *FUNCIONES LOCALES
  ******************************************************************************/
 
-/*void blink_port(void)
-{
-   int index=0;
-   bool blink_flag=false;
-   
-   
-   }
-   
-   
-}
- */
 
 void print_led(void) {
     ALLEGRO_BITMAP *ledOn = al_load_bitmap("led_on.jpeg");
@@ -253,3 +244,5 @@ void print_led(void) {
     
     
 }
+
+
