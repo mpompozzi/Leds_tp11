@@ -23,7 +23,6 @@
  * PROTOTIPOS
  ******************************************************************************/
 void printPort(char puerto);
-int input(void);
 void print_led(void);
 
 /*******************************************************************************
@@ -108,7 +107,8 @@ int main(void) {
 
 
     maskOff(mask, puerto); //Apago todos los  bit del puerto 
-    //printPort(puerto); //Imprimo el puerto
+   
+    //Imprimo el puerto
     print_led();
     al_register_event_source(event_queue, al_get_display_event_source(display));
     al_register_event_source(event_queue, al_get_keyboard_event_source());
@@ -117,8 +117,8 @@ int main(void) {
 
     while (!out) {
         
-        ALLEGRO_EVENT ev;
-        al_wait_for_event(event_queue, &ev);
+        ALLEGRO_EVENT ev;     //Creamos la estructura de evento      
+        al_wait_for_event(event_queue, &ev);    //Esperamos por eventos
         bool blink=1;
         
         if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
@@ -126,7 +126,7 @@ int main(void) {
                 case ALLEGRO_KEY_B:
                 {
                     int c = 0;
-                    for (c = 0; c <= 7; ++c) {
+                    for (c = 0; c <= 7; ++c) {              //Pasamos los valores actuales a la matriz de estados anteriores
                         led_anterior[c] = led_actual[c];
                     }
                                         
@@ -140,82 +140,82 @@ int main(void) {
                     {
                         
                         int c=0;
-                        maskOff(mask, puerto);
-                        print_led();
+                        maskOff(mask, puerto); //Apagamos todos los leds
+                        print_led();   //Imprimimos el puerto
                         
-                        al_rest(0.1);   //Espera 5 
-                        al_get_next_event(event_queue, &ev);
+                        al_rest(0.1);   //Usamos al_rest como delay para el blinkeo
+                        
 
                         for (c = 0; c <= 7; ++c) 
                         {
                             led_actual[c] = led_anterior[c];
-                            if (led_anterior[c]) 
+                            if (led_anterior[c]) //Si el led estaba encedido antes de apagarlo, lo vuelve a encender
                             {
                                 bitSet(c, 'A');
                             }
                         }
                         
-                        print_led();
+                        print_led();        //Volvemos a imprimir el puerto
                         
-                        al_rest(0.1);
+                        al_rest(0.1);       //Usamos al_rest como delay para el blinkeo
                         
-                        al_get_next_event(event_queue, &ev);
+                        al_get_next_event(event_queue, &ev); //Esperamos otravez a que se presione la b
                     }
                 }
                     break;
-                case ALLEGRO_KEY_S:
-                    maskOn(mask, 'A');
+                case ALLEGRO_KEY_S:         //Si presiona S por el teclado
+                    maskOn(mask, 'A');      //encendemos los leds e imprimimos el puerto
                     print_led();
                     break;
-                case ALLEGRO_KEY_C:
-                    maskOff(mask, 'A');
+                case ALLEGRO_KEY_C:         //Si presiona C apagamos los leds
+                    maskOff(mask, 'A');     // e imprimimos el puerto
                     print_led();
                     break;
-                case ALLEGRO_KEY_T:
-                    maskToggle(mask, 'A');
+                case ALLEGRO_KEY_T:         // Si presiona T cambiamos de valor
+                    maskToggle(mask, 'A');  //los leds e imprimimos el puerto
                     print_led();
                     break;
-                case ALLEGRO_KEY_0:
+                case ALLEGRO_KEY_0:         //Enciende led 0
                     bitToggle(0, 'A');
                     print_led();
                     break;
-                case ALLEGRO_KEY_1:
+                case ALLEGRO_KEY_1:         //Enciende led 1
                     bitToggle(1, 'A');
                     print_led();
                     break;
-                case ALLEGRO_KEY_2:
+                case ALLEGRO_KEY_2:         //Enciende led 2
                     bitToggle(2, 'A');
                     print_led();
                     break;
-                case ALLEGRO_KEY_3:
+                case ALLEGRO_KEY_3:         //Enciende led 3
                     bitToggle(3, 'A');
                     print_led();
                     break;
-                case ALLEGRO_KEY_4:
+                case ALLEGRO_KEY_4:         //Enciende led 4
                     bitToggle(4, 'A');
                     print_led();
                     break;
-                case ALLEGRO_KEY_5:
+                case ALLEGRO_KEY_5:         //Enciende led 5
                     bitToggle(5, 'A');
                     print_led();
                     break;
-                case ALLEGRO_KEY_6:
+                case ALLEGRO_KEY_6:         //Enciende led 6
                     bitToggle(6, 'A');
                     print_led();
                     break;
-                case ALLEGRO_KEY_7:
+                case ALLEGRO_KEY_7:         //Enciende led 7
                     bitToggle(7, 'A');
                     print_led();
                     break;
-                case ALLEGRO_KEY_ESCAPE:
+                case ALLEGRO_KEY_ESCAPE:    //Sale del programa
                 case ALLEGRO_KEY_Q:
                     out = 1;
                     break;
             }
         }
         
-        if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
-        {
+        if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)     //Si el evento e cerrar el display
+        {                                               //cerramos el programa
             out=1;
         }
     }
@@ -227,26 +227,28 @@ int main(void) {
 }
 
 /*******************************************************************************
- *FUNCIONES LOCALES
+ *FUNCION PRINT_LED: Imprime el puerto de 8 bits en pantalla
  ******************************************************************************/
 
-
-void print_led(void) {
-    ALLEGRO_BITMAP *ledOn = al_load_bitmap("led_on.jpeg");
-    ALLEGRO_BITMAP *ledOff = al_load_bitmap("led_off.jpeg");
-    int c;
-    al_clear_to_color(al_map_rgb(255, 255, 255));
-    for (c = 0; c <= 7; ++c) {
-        led_actual[c]=bitGet(c,'A');
-        if (bitGet(c, 'A') == true) {
+void print_led(void) { 
+    
+    ALLEGRO_BITMAP *ledOn = al_load_bitmap("led_on.jpeg");      //Cargamos la foto para el led ON
+    ALLEGRO_BITMAP *ledOff = al_load_bitmap("led_off.jpeg");    //Cargamos la foto para el led OFF
+    
+    int c;  //Variable para loop for
+    
+    al_clear_to_color(al_map_rgb(255, 255, 255));        //Seteamos el fondo blanco
+    
+    for (c = 0; c <= 7; ++c) {                           //Recorremos todos los leds cargamos su estado a la matriz
+        led_actual[c]=bitGet(c,'A');                     //de estado actual
+        if (bitGet(c, 'A') == true) {                    //Si es positivo, mostramos la foto de led ON
             al_draw_bitmap(ledOn, leds_pos[c], 50, 0);
         } else {
-            al_draw_bitmap(ledOff, leds_pos[c], 50, 0);
+            al_draw_bitmap(ledOff, leds_pos[c], 50, 0);  //Si es negativo, mostramos la foto de OFF
         }
     }
-    al_flip_display();
-    
-    
+    al_flip_display();          //Mostramos el display
+  
 }
 
 
