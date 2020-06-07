@@ -119,6 +119,7 @@ int main(void) {
         
         ALLEGRO_EVENT ev;
         al_wait_for_event(event_queue, &ev);
+        bool blink=1;
         
         if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
             switch (ev.keyboard.keycode) {
@@ -128,6 +129,7 @@ int main(void) {
                     for (c = 0; c <= 7; ++c) {
                         led_anterior[c] = led_actual[c];
                     }
+                                        
                     while (ev.type == ALLEGRO_EVENT_KEY_DOWN && ev.keyboard.keycode == ALLEGRO_KEY_B) {
                         al_get_next_event(event_queue, &ev);
                     } //Neutralizamos el eco del input de la letra b
@@ -230,6 +232,7 @@ void print_led(void) {
     int c;
     al_clear_to_color(al_map_rgb(255, 255, 255));
     for (c = 0; c <= 7; ++c) {
+        led_actual[c]=bitGet(c,'A');
         if (bitGet(c, 'A') == true) {
             al_draw_bitmap(ledOn, leds_pos[c], 50, 0);
         } else {
