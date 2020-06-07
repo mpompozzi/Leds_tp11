@@ -27,7 +27,7 @@ void print_led(void);
 /*******************************************************************************
  * VARIABLES GLOBALES
  ******************************************************************************/
-int leds_pos[8] = {0, DIST, 2 * DIST, 3 * DIST, 4 * DIST, 5 * DIST, 6 * DIST, 7 * DIST};
+int leds_pos[8] = {10,10+DIST,10+ 2 * DIST,10+ 3 * DIST,10+ 4 * DIST,10+ 5 * DIST,10+ 6 * DIST,10+ 7 * DIST};
 bool led_actual[8];
 bool led_anterior[8];
 
@@ -242,26 +242,12 @@ void print_led(void) {
     }
     for (c = 0; c <= 7; ++c) {
         if (led_actual[c] == true) {
-            al_draw_bitmap(ledOn, leds_pos[c], 100, 0);
+            al_draw_bitmap(ledOn, leds_pos[c], 50, 0);
         } else {
-            al_draw_bitmap(ledOff, leds_pos[c], 100, 0);
+            al_draw_bitmap(ledOff, leds_pos[c], 50, 0);
         }
     }
     al_flip_display();
     
-    int i=0;
-    printf("|");
-    for(i=0; i<=7;i++)
-    {
-        if(led_actual[i])    //Si bitGet devuelve 1, porque el bit esta prendido
-        {
-            printf("*");        // imprimo un *
-        }
-        else                    //Caso contrario (si devuelve un 0) 
-        {
-            printf(" ");        // imprimo un espacio
-        }
-        printf("|");
-    }
-    printf("\n");
+    
 }
