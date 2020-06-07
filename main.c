@@ -110,7 +110,7 @@ int main(void) {
     maskOff(mask, puerto); //Apago todos los  bit del puerto 
     //printPort(puerto); //Imprimo el puerto
     print_led();
-
+    al_register_event_source(event_queue, al_get_display_event_source(display));
     al_register_event_source(event_queue, al_get_keyboard_event_source());
     
     bool out = 0;
@@ -210,6 +210,11 @@ int main(void) {
                     out = 1;
                     break;
             }
+        }
+        
+        if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+        {
+            out=1;
         }
     }
     /*FINALIZACION DEL PROGRAMA*/
