@@ -230,10 +230,7 @@ void print_led(void) {
     int c;
     al_clear_to_color(al_map_rgb(255, 255, 255));
     for (c = 0; c <= 7; ++c) {
-        led_actual[c] = (bool) bitGet(c, 'A');
-    }
-    for (c = 0; c <= 7; ++c) {
-        if (led_actual[c] == true) {
+        if (bitGet(c, 'A') == true) {
             al_draw_bitmap(ledOn, leds_pos[c], 50, 0);
         } else {
             al_draw_bitmap(ledOff, leds_pos[c], 50, 0);
