@@ -41,7 +41,7 @@ int main(void) {
     ALLEGRO_BITMAP *ledOff;
     //ALLEGRO_BITMAP *background = NULL;
     ALLEGRO_EVENT_QUEUE *event_queue = NULL;
-    ALLEGRO_TIMER *timer = NULL;
+   
 
 
     /******************** INICIALIZACIONES DE ALLEGRO  ****************************/
@@ -61,12 +61,7 @@ int main(void) {
         fprintf(stderr, "failed to create event_queue!\n");
         return -1;
     }
-    /*INICIALIZO EL TIMER*/
-    timer = al_create_timer(1.0 / FPS); //crea el timer pero NO empieza a correr
-    if (!timer) {
-        fprintf(stderr, "failed to create timer!\n");
-        return -1;
-    }
+    
     /*INICIALIZO OPERACIONES CON IMAGENES*/
     al_init_image_addon();
     if (!al_init_image_addon()) {
@@ -114,9 +109,7 @@ int main(void) {
     print_led();
 
     al_register_event_source(event_queue, al_get_keyboard_event_source());
-    al_register_event_source(event_queue, al_get_timer_event_source(timer));
-    al_start_timer(timer); //Recien aca EMPIEZA el timer
-
+    
     bool out = 0;
 
     while (!out) {
@@ -136,9 +129,12 @@ int main(void) {
                     } //Neutralizamos el eco del input de la letra b
                     
                     print_led();
-
-                    while (ev.type != ALLEGRO_EVENT_KEY_DOWN || ev.keyboard.keycode != ALLEGRO_KEY_B)
+                    
+                    al_wait_for_event(event_queue, &ev);
+                    
+                    while (!(ev.type == ALLEGRO_EVENT_KEY_DOWN && ev.keyboard.keycode == ALLEGRO_KEY_B))
                     {
+                        
                         int c=0;
                         maskOff(mask, puerto);
                         print_led();
@@ -216,7 +212,6 @@ int main(void) {
     /*FINALIZACION DEL PROGRAMA*/
     printf("Termino el programa\n"); //Se presiono q y termina el programa.
     al_destroy_bitmap(ledOn);
-    al_destroy_timer(timer);
     al_destroy_display(display); // Destruyo recurso empleados
     return 0;
 }
