@@ -142,7 +142,7 @@ int main(void) {
                         maskOff(mask, puerto);
                         print_led();
                         
-                        al_res(0.1);   //Espera 5 
+                        al_rest(0.1);   //Espera 5 
                         al_get_next_event(event_queue, &ev);
 
                         for (c = 0; c <= 7; ++c) 
@@ -156,7 +156,7 @@ int main(void) {
                         
                         print_led();
                         
-                        al_res(0.1);
+                        al_rest(0.1);
                         
                         al_get_next_event(event_queue, &ev);
                     }
