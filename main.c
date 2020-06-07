@@ -41,6 +41,7 @@ int main(void) {
     ALLEGRO_DISPLAY * display = NULL;
     ALLEGRO_BITMAP *ledOn;
     ALLEGRO_BITMAP *ledOff;
+    ALLEGRO_BITMAP *instrucciones;
     //ALLEGRO_BITMAP *background = NULL;
     ALLEGRO_EVENT_QUEUE *event_queue = NULL;
    
@@ -84,6 +85,13 @@ int main(void) {
         fprintf(stderr, "failed to load image !\n");
         return -1;
     }
+    
+    instrucciones= al_load_bitmap("instrucciones.jpeg");
+    if (!instrucciones)      
+    {
+        fprintf(stderr, "failed to load image \n");
+        return -1;
+    }    
 
     /*CREACIÓN  EL DISPLAY PRINCIPAL*/
     display = al_create_display(ANCHO, ALTO); // Intenta crear display, si falla devuelve NULL
@@ -143,7 +151,7 @@ int main(void) {
                         maskOff(mask, puerto); //Apagamos todos los leds
                         print_led();   //Imprimimos el puerto
                         
-                        al_rest(0.1);   //Usamos al_rest como delay para el blinkeo
+                        al_rest(0.07);   //Usamos al_rest como delay para el blinkeo
                         
                         for (c = 0; c <= 7; ++c) 
                         {
@@ -156,7 +164,7 @@ int main(void) {
                         
                         print_led();        //Volvemos a imprimir el puerto
                         
-                        al_rest(0.1);       //Usamos al_rest como delay para el blinkeo
+                        al_rest(0.07);       //Usamos al_rest como delay para el blinkeo
                         
                         al_get_next_event(event_queue, &ev); //Esperamos otravez a que se presione la b
                     }
@@ -233,7 +241,7 @@ void print_led(void) {
     
     ALLEGRO_BITMAP *ledOn = al_load_bitmap("led_on.jpeg");      //Cargamos la foto para el led ON
     ALLEGRO_BITMAP *ledOff = al_load_bitmap("led_off.jpeg");    //Cargamos la foto para el led OFF
-    
+    ALLEGRO_BITMAP *instrucciones = al_load_bitmap("instrucciones.jpeg");
     int c;  //Variable para loop for
     
     al_clear_to_color(al_map_rgb(255, 255, 255));        //Seteamos el fondo blanco
@@ -246,6 +254,7 @@ void print_led(void) {
             al_draw_bitmap(ledOff, leds_pos[c], 50, 0);  //Si es negativo, mostramos la foto de OFF
         }
     }
+    al_draw_bitmap(instrucciones,0,150,0);    
     al_flip_display();          //Mostramos el display
   
 }

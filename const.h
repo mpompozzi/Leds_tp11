@@ -20,7 +20,7 @@
 #define MASK16 0X0001
 #define QUIT -2
 
-#define ALTO 150
+#define ALTO 300
 #define ANCHO 420
 #define DIST 50
 
