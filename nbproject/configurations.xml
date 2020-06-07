@@ -15,7 +15,6 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>Led_Emul.c</itemPath>
       <itemPath>PortControl.c</itemPath>
       <itemPath>main.c</itemPath>
     </logicalFolder>
@@ -76,8 +75,6 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="Led_Emul.c" ex="false" tool="0" flavor2="0">
-      </item>
       <item path="Led_Emul.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="PortControl.c" ex="false" tool="0" flavor2="0">
@@ -110,8 +107,6 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="Led_Emul.c" ex="false" tool="0" flavor2="0">
-      </item>
       <item path="Led_Emul.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="PortControl.c" ex="false" tool="0" flavor2="0">
