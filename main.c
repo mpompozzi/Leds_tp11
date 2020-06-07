@@ -116,6 +116,7 @@ int main(void) {
     bool out = 0;
 
     while (!out) {
+        
         ALLEGRO_EVENT ev;
         al_wait_for_event(event_queue, &ev);
         
@@ -132,8 +133,6 @@ int main(void) {
                     } //Neutralizamos el eco del input de la letra b
                     
                     print_led();
-                    
-                    al_wait_for_event(event_queue, &ev);
                     
                     while (!(ev.type == ALLEGRO_EVENT_KEY_DOWN && ev.keyboard.keycode == ALLEGRO_KEY_B))
                     {
