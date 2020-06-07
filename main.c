@@ -145,7 +145,6 @@ int main(void) {
                         
                         al_rest(0.1);   //Usamos al_rest como delay para el blinkeo
                         
-
                         for (c = 0; c <= 7; ++c) 
                         {
                             led_actual[c] = led_anterior[c];
